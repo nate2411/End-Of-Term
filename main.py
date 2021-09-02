@@ -38,6 +38,7 @@ def create_product_table():
         connection.execute("CREATE TABLE IF NOT EXISTS product("
                            "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                            "name TEXT NOT NULL,"
+                           "img_url TEXT NOT NULL,"
                            "description TEXT NOT NULL,"
                            "price TEXT NOT NULL,"
                            "category TEXT NOT NULL,"
@@ -164,12 +165,13 @@ def add_product():
         description = request.form['description']
         price = request.form['price']
         category = request.form['category']
+        img_url = request.form['img_url']
         review = request.form['review']
 
         with sqlite3.connect('end_db.db') as conn:
             cursor = conn.cursor()
-            cursor.execute(f"INSERT INTO product( name, description, price, category, review )"
-                           f"VALUES( '{name}', '{description}', '{price}', '{category}', '{review}' )")
+            cursor.execute(f"INSERT INTO product( name, description, price, category, review, img_url)"
+                           f"VALUES( '{name}', '{description}', '{price}', '{category}', '{review}', '{img_url}' )")
             conn.commit()
 
             response["status_code"] = 201
@@ -273,6 +275,17 @@ def edit_product(product_id):
             with sqlite3.connect('end_db.db') as connection:
                 cursor = connection.cursor()
                 cursor.execute(f"UPDATE product SET review = '{str(put_data['review'])}'  WHERE id = {str(product_id)}")
+                connection.commit()
+
+                response["content"] = "Content updated successfully"
+                response["status_code"] = 200
+
+        if incoming_data.get("img_url") is not None:
+            put_data['img_url'] = incoming_data.get('img_url')
+
+            with sqlite3.connect('end_db.db') as connection:
+                cursor = connection.cursor()
+                cursor.execute(f"UPDATE product SET img_url = '{str(put_data['img_url'])}' WHERE id = {str(product_id)}")
                 connection.commit()
 
                 response["content"] = "Content updated successfully"
