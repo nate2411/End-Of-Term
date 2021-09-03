@@ -106,12 +106,12 @@ def user_registration():
     response = {}
 
     if request.method == "POST":
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        username = request.form['username']
-        address = request.form['address']
-        password = request.form['password']
-        email_address = request.form['email_address']
+        first_name = request.json['first_name']
+        last_name = request.json['last_name']
+        username = request.json['username']
+        address = request.json['address']
+        password = request.json['password']
+        email_address = request.json['email_address']
 
         with sqlite3.connect("end_db.db") as conn:
             cursor = conn.cursor()
