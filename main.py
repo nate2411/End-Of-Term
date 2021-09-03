@@ -120,6 +120,9 @@ def user_registration():
                            f"'{password}' )")
             conn.commit()
 
+            global users
+            users = fetch_users()
+
             response["message"] = "success"
             response["status_code"] = 201
             if response['status_code'] == 201:
