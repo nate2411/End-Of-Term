@@ -127,7 +127,7 @@ def user_registration():
             response["status_code"] = 201
             if response['status_code'] == 201:
                 msg = Message('Email', sender='ndj6851@gmail.com', recipients=[email_address])
-                msg.body = "You are successfully Login in"
+                msg.body = "You are successfully  Registered"
                 mail.send(msg)
                 response["email_status"] = "Email Sent"
 
