@@ -141,11 +141,12 @@ def login():
 
     if request.method == "POST":
 
-        username = request.form['username']
-        password = request.form['password']
+        username = request.json['username']
+        password = request.json['password']
 
         with sqlite3.connect("end_db.db") as conn:
             cursor = conn.cursor()
+            print(f"SELECT * FROM user WHERE username = '{username}' AND password = '{password}'")
             cursor.execute(f"SELECT * FROM user WHERE username = '{username}' AND password = '{password}'")
             user_information = cursor.fetchone()
 
