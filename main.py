@@ -163,7 +163,7 @@ def login():
 
 
 @app.route('/add-product/', methods=["POST"])
-@jwt_required()
+# @jwt_required()
 def add_product():
     response = {}
 
