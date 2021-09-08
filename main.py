@@ -168,12 +168,12 @@ def add_product():
     response = {}
 
     if request.method == "POST":
-        name = request.form['name']
-        description = request.form['description']
-        price = request.form['price']
-        category = request.form['category']
-        img_url = request.form['img_url']
-        review = request.form['review']
+        name = request.json['name']
+        description = request.json['description']
+        price = request.json['price']
+        category = request.json['category']
+        img_url = request.json['img_url']
+        review = request.json['review']
 
         with sqlite3.connect('end_db.db') as conn:
             cursor = conn.cursor()
