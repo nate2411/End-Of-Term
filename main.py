@@ -301,7 +301,7 @@ def edit_product(product_id):
 
 
 @app.route("/delete-product/<int:product_id>", methods=["GET"])
-@jwt_required()
+# @jwt_required()jwt_required
 def delete_product(product_id):
     response = {}
     with sqlite3.connect("end_db.db") as conn:
